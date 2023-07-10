@@ -10,35 +10,59 @@ const Select = ({ label, value, onChange, children }) => {
 
   return (
     <SelectWrapper>
-      <SelectForm value={value} onChange={onChange}>
+      <NativeSelect value={value} onChange={onChange}>
         {children}
-      </SelectForm>
-      <IconWrapper id="chevron-down"></IconWrapper>
+      </NativeSelect>
+      <PresentationalBit>
+        {displayedValue}
+        <IconWrapper style={{ '--size': 24 + 'px' }}>
+          <Icon strokeWidth={1} id="chevron-down" size={24}></Icon>
+        </IconWrapper>
+      </PresentationalBit>
     </SelectWrapper>
   );
 };
 
-const SelectForm = styled.select`
+const NativeSelect = styled.select`
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
   appearance: none;
   height: 100%;
-  border: none;
-  background-color: ${COLORS.transparentGray15};
-  color: ${COLORS.gray700};
-  padding: 12px 52px 12px 16px;
-  border-radius: 8px;
-  width: min-content;
-  font-size: 1em;
+  width: 100%;
+  opacity: 0;
 `;
 
 const SelectWrapper = styled.div`
   position: relative;
-  width: fit-content;
+  width: max-content;
+  isolation: isolate;
 `;
 
-const IconWrapper = styled(Icon)`
+const PresentationalBit = styled.div`
+  color: ${COLORS.gray700};
+  background-color: ${COLORS.transparentGray15};
+  padding: 12px 16px;
+  padding-right: 52px;
+  font-size: ${16 / 16}rem;
+  border-radius: 8px;
+
+  ${NativeSelect}:focus + & {
+    outline: 1px dotted #212121;
+    outline: 5px auto -webkit-focus-ring-color;
+  }
+`;
+
+const IconWrapper = styled.div`
+  z-index: 1;
   position: absolute;
-  top: 20%;
-  right: 10%;
+  top: 0;
+  right: 10px;
+  bottom: 0;
+  margin: auto;
+  height: var(--size);
+  width: var(--size);
 `;
 
 export default Select;
