@@ -47,6 +47,9 @@ const IconInput = ({
           strokeWidth={strokeWidth}
         ></Icon>
       </IconWrapper>
+      <VisuallyHidden>
+        <label htmlFor="search">{label}</label>
+      </VisuallyHidden>
       <InputWrapper
         width={width}
         type="text"
@@ -83,7 +86,7 @@ const InputWrapper = styled.input`
   z-index: 2;
   position: relative;
   height: var(--height);
-  width: ${(props) => props.width};
+  width: ${(props) => props.width}px;
   font-size: var(--font-size);
   color: ${COLORS.gray700};
   font-weight: 700;
